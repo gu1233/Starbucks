@@ -18,6 +18,7 @@ searchInputEl.addEventListener('blur', function () {
 
 //배지
 const badgeEl = document.querySelector('header .badges');
+const toTopEl = document.querySelector('#to-top');
 
 window.addEventListener('scroll', _.throttle(function () {
   if (window.scrollY > 500) {
@@ -27,15 +28,29 @@ window.addEventListener('scroll', _.throttle(function () {
       opacity: 0,
       display: 'none'
     });
+    // 버튼 보이기
+    gsap.to(toTopEl, .2, {
+      x: 0
+    });
   } else {
     // 배지 보이기
     gsap.to(badgeEl, .6, {
       opacity: 1,
       display: 'block'
     });
+    // 버트 숨기기
+    gsap.to(toTopEl, .2, {
+      x: 100
+    });
   }
 }, 3000));
 //_.throttle(함수, 시간)
+
+toTopEl.addEventListener('click', function () {
+  gsap.to(window, .7, {
+    scrollTo: 0
+  });
+});
 
 
 //순차적으로 이미지 보이기
